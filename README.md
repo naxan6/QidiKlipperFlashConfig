@@ -1,6 +1,6 @@
 # Introduction
 
-Links etc. where valid on 2021-11-17
+Links etc. were valid on 2021-11-17
 
 **DISCLAIMER: be warned, here be dragons**
 *it worked for me - but it could fail **you***
