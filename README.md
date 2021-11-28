@@ -11,14 +11,9 @@ This documentation explains the most important steps to install Klipper
 Currently you will have to flash klippers firmware via an ST-Link v2 (or similar).
 
 **what is missing**
-*  example config files for klipper (printer.cfg and some helpful
-   predefined macros and start and end gcodes für Super Slicer and Cura)
-*  example config files for moonraker (moonraker.cfg)
-*  maybe precompiled klipper.bin (if, it never will be updated)
-*  my docker compose definitions (+ maybe a short introduction for those
-   that want to go down the docker way)
-*  my klipperScreen-Config (didn't see an easy way to put it into a
-   docker container so installed it directly the the raspberry)
+*  maybe precompiled klipper.bin (bad idea,  it never would be up to date)
+*  my docker compose definitions (+ maybe a short introduction for those that want to go down the docker way; atm still a bad idea: it's not "just working")
+*  my Klipper Screen - config (didn't see an easy way to put it into a docker container so installed it directly the the raspberry)
 
 **how to read this**
 
@@ -76,7 +71,7 @@ Currently you will have to flash klippers firmware via an ST-Link v2 (or similar
        https://discord.com/channels/686160672211730511/821928891491942451/903867198441918487  
         *  **!!warning!! for X-Plus** some values are off because Funktons printer.cfg targets an X-Max - and a modified one :p
     
-        Necessary changes to his print.cfg:
+        Necessary changes to his printer.cfg:
         - X-Plus: for an X-Plus you have to adjust dimensions
         - Pullys: probably you have to go with with different rotation_distance (Funkton has 17T pullys, Qidi's original are 16T, I myself have 20T):
         
