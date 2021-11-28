@@ -72,10 +72,10 @@ Currently you will have to flash klippers firmware via an ST-Link v2 (or similar
        https://github.com/th33xitus/kiauh 
 
 *  *how to I configure klipper etc.?*
-    *  maybe use Funkton's unfortunately outdated config files and start from there
-   https://discord.com/channels/686160672211730511/821928891491942451/903867198441918487  
-        *  **!!warning!! for X-Plus** some values are offm because Funktons printer.cfg targets an X-Max - and a modified one :p
-           
+    *  You could start with Funkton's config files and start from there (unfortunately outdated)
+       https://discord.com/channels/686160672211730511/821928891491942451/903867198441918487  
+        *  **!!warning!! for X-Plus** some values are off because Funktons printer.cfg targets an X-Max - and a modified one :p
+    
         Necessary changes to his print.cfg:
         - X-Plus: for an X-Plus you have to adjust dimensions
         - Pullys: probably you have to go with with different rotation_distance (Funkton has 17T pullys, Qidi's original are 16T, I myself have 20T):
@@ -106,7 +106,7 @@ Currently you will have to flash klippers firmware via an ST-Link v2 (or similar
         ....
         ```
 
-    * use mine as a starting point (see github)
+    * use mine as a starting point, they are based on Funktons (see https://github.com/naxan6/QidiKlipperFlashConfig/tree/main/configs)
 
 -  *when am I done with chapter 0?*  
    you are done with your klipper/moonraker/fluidd stack, if fluidd shows one of the following two (but no other errors)
