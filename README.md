@@ -11,14 +11,9 @@ This documentation explains the most important steps to install Klipper
 Currently you will have to flash klippers firmware via an ST-Link v2 (or similar).
 
 **what is missing**
-*  example config files for klipper (printer.cfg and some helpful
-   predefined macros and start and end gcodes für Super Slicer and Cura)
-*  example config files for moonraker (moonraker.cfg)
-*  maybe precompiled klipper.bin (if, it never will be updated)
-*  my docker compose definitions (+ maybe a short introduction for those
-   that want to go down the docker way)
-*  my klipperScreen-Config (didn't see an easy way to put it into a
-   docker container so installed it directly the the raspberry)
+*  maybe precompiled klipper.bin (if, but it never would be up to date)
+*  my docker compose definitions (+ maybe a short introduction for those that want to go down the docker way)
+*  my Klipper Screen - config (didn't see an easy way to put it into a docker container so installed it directly the the raspberry)
 
 **how to read this**
 
