@@ -60,6 +60,8 @@ Currently you will have to flash klippers firmware via an ST-Link v2 (or similar
     5V->5V
     ```
     (Sidenote: I connected 5V from Qidis Mainboard to the 5V on the USB-To-Serial-Adapter, but put a tape onto the USB 5V-Pin inside the USB plug to avoid powering the mainboard through the raspberry)
+   * ![Alt text](/images/mainboard_overview.jpg?raw=true "Mainboard")
+   * ![Alt text](/images/focusMainboardSerial.jpg?raw=true "Serial")
 
 *where to start?*
   *  I for myself started with **prind** (docker compose based setup) on an Raspberry Pi OS and altered it to my wishes
@@ -146,12 +148,15 @@ Currently you will have to flash klippers firmware via an ST-Link v2 (or similar
     ``` 
        ST-Link ------> Qidi Mainboard
        ==============================
-       SWCLK   ------> SWCS
+       SWCLK   ------> SWC9
        SWDIO   ------> SWI7
        GND     ------> GND
        3.3V    ------> 3V
     ```
 ![alt text](https://media.discordapp.net/attachments/821928891491942451/838586897835622450/image0.jpg?width=1584&height=1265)
+![Alt text](/images/mainboard_overview.jpg?raw=true "Mainboard")
+![Alt text](/images/focusMainboardSTLinkv2.jpg?raw=true "MainboardSTLink")
+![Alt text](/images/STLinkV2.jpg?raw=true "STLink")
 
 * Settings in STM32CubeProg (see https://discord.com/channels/686160672211730511/821928891491942451/838635980272435221)  
   * Port: SWD
@@ -160,7 +165,7 @@ Currently you will have to flash klippers firmware via an ST-Link v2 (or similar
   * Access: 0
   * Reset mode: Hardware reset
   * Shared Disabled
-  * ![alt text](https://media.discordapp.net/attachments/821928891491942451/838635980248317992/ST-Link_config.png)
+  * ![Alt text](/images/ST-Link_config.png?raw=true "stconfig")
 * Click Button 'Connect' (top right corner) in STM32CubeProg
 * case 1: you have the original Bootloader on the mainboard: it will connect straight away
   * case 2: you have klipper or something else on the mainboard: it will
