@@ -33,7 +33,7 @@ This documentation explains the most important steps to install Klipper
 0. Install klipper/moonraker/fluidd on a fast enough Raspberry Pi
 -----------------------------------------------------------------
 
--  *why do I need this all?*
+*why do I need  all this stuff?*
 -  **klipper** connects to the klipper-firmware-part on the mainboard
    ::
 
