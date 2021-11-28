@@ -71,7 +71,7 @@ Currently you will have to flash klippers firmware via an ST-Link v2 (or similar
        https://discord.com/channels/686160672211730511/821928891491942451/903867198441918487  
         *  **!!warning!! for X-Plus** some values are off because Funktons printer.cfg targets an X-Max - and a modified one :p
     
-        Necessary changes to his print.cfg:
+        Necessary changes to his printer.cfg:
         - X-Plus: for an X-Plus you have to adjust dimensions
         - Pullys: probably you have to go with with different rotation_distance (Funkton has 17T pullys, Qidi's original are 16T, I myself have 20T):
         
