@@ -313,4 +313,3 @@ Appendix A - as a sidenote some observations regarding the klipper firmware inst
    single short deep beep) - even if bootloader itself is still present
    - the second time it will not beep and probably will do nothing.
    Switch to another update.qd version and it will again work.
-
