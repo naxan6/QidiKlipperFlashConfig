@@ -11,8 +11,8 @@ This documentation explains the most important steps to install Klipper
 Currently you will have to flash klippers firmware via an ST-Link v2 (or similar).
 
 **what is missing**
-*  maybe precompiled klipper.bin (if, but it never would be up to date)
-*  my docker compose definitions (+ maybe a short introduction for those that want to go down the docker way)
+*  maybe precompiled klipper.bin (bad idea,  it never would be up to date)
+*  my docker compose definitions (+ maybe a short introduction for those that want to go down the docker way; atm still a bad idea: it's not "just working")
 *  my Klipper Screen - config (didn't see an easy way to put it into a docker container so installed it directly the the raspberry)
 
 **how to read this**
