@@ -138,7 +138,7 @@ Currently you will have to flash klippers firmware via an ST-Link v2 (or similar
 *  Unscrew and remove the lower cover so you have access to the mainboard
 
 
-# Connect the ST-Link to the printer
+# 2. Connect the ST-Link to the printer
 *  Update ST-LinkV2 Firmware (it's forced by STM32CubeProg)
 * **Dual check you have shut down the printer (physical power off button in the back)**
 * Connect the pins, they are not in the same order but very good "matchable"  
