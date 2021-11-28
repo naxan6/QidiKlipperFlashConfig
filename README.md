@@ -106,7 +106,7 @@ Currently you will have to flash klippers firmware via an ST-Link v2 (or similar
         ....
         ```
 
-    * use mine as a starting point, they are based on Funktons (see https://github.com/naxan6/QidiKlipperFlashConfig/tree/main/configs)
+    * or just use mine as a starting point, they are based on Funktons (see https://github.com/naxan6/QidiKlipperFlashConfig/tree/main/configs)
 
 -  *when am I done with chapter 0?*  
    you are done with your klipper/moonraker/fluidd stack, if fluidd shows one of the following two (but no other errors)
