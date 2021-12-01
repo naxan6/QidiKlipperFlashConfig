@@ -197,7 +197,7 @@ FYI according to https://www.st.com/en/microcontrollers-microprocessors/stm32f40
 * when doing ``make menuconfig`` follow what Funkton describes in his
    printer Config for FIRMWARE build, see excerpt of current version
    below.
-    ```CSharp
+    ```text
        # This is a Klipper configuration for Qidi X-Max, with
        # V4.6 motherboard. By Funkton
        ## FIRMWARE BUILD
