@@ -170,6 +170,7 @@ Currently you will have to flash klippers firmware via an ST-Link v2 (or similar
     * click the Button 'Connect' (top right corner) in STM32CubeProg
     * release the reset-Button on the mainboard (still the on behind the
       usb and ethernet ports)
+      ![Alt text](/images/resetButton1.jpg?raw=true "reset-button")
 * Now it should be connected
 
 # 3. Backup complete original firmware (including bootloader)
