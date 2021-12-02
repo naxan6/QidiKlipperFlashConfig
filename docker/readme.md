@@ -1,7 +1,7 @@
 # Start Klipper, Fluidd, Mainsail, Octoprint with Streaming Cam and Config Editor and also a firmware build image
 
 ##  Startup via docker-compose (or e.g. stacks in portainer)
-I like portainer as docker Web-GUI. You can use it to start this file as a Stack after bringing portainer up by:  
+I like portainer as docker Web-GUI. You can use it to start the yaml file as a stack after bringing portainer up by:  
 ```docker run -d -p 9000:9000 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce```
   
 Access Portainer:  http://192.168.178.120:9000
