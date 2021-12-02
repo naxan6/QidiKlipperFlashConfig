@@ -24,14 +24,14 @@ Currently you will have to flash klippers firmware via an ST-Link v2 (or similar
 *  if you want to go back to original qidi firmware, do chapter 4 with
    the firmware-backup from chapter 3.
 
-**what the.. what is going on, what will hapen?**
+# What the.. what is going on, what will happen?
 
 After you installed klipper firmware, the following will happen:
 *  You can NOT use the original screen anymore.
 *  You can NOT use the original USB port anymore.
 *  Actually you can't use ANY user interface from your printer anymore 😅 😆   
 
-Instead:
+Instead it will be like that:
 *  You have to program the mainboard with klipper firmware.
 *  Only known way to do this is an USB programmer named ST-Link, you use it from a personal computer. (maybe there are other ways, it's the only one I know)
 *  You need a raspberry with a klipper stack to send commands to your printer (connected to serial pins on the mainboard).
