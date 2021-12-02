@@ -26,6 +26,8 @@
 #      to 
 #           /cfg     
 #      (drag-and-drop from eg. windows explorer works great!)
+#      be warned, you should look them through. Know what you do. 
+#      btw. I have 20T pulleys, an Icarus with Mini Sherpa and a PEI sheet as print surface
 #   3. Alter printer.cfg to match your printers serial-device
 #   4. Right click Folder "cfg" and select "open in integrated terminal"
 #       --> the terminal open in the lower part.
