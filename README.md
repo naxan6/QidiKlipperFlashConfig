@@ -76,9 +76,9 @@ Btw. With "klipper stack" I mean klipper backend, moonraker and a gui (fluidd, m
    * ![Alt text](/images/focusMainboardSerial.jpg?raw=true "Serial")
 
 *where to start?*
-  *  I for myself started with **prind** (docker compose based setup) on an Raspberry Pi OS and altered it to my wishes
-   but there are many additional hurdles if you're not used to docker so I would not recommend this to everybody... it's also not quirks free at the moment (have to restart the  klipper-container to reconnect to the printer because the serial device-mapping into the container will get lost)
-   https://github.com/mkuf/prind
+  *  I for myself started with **prind** https://github.com/mkuf/prind (docker compose based setup) on an Raspberry Pi OS and altered it to my wishes  
+     See [my docker compose solution for this](docker/) mainly using portainer as an interface.  
+     But there are many additional hurdles if you're not used to docker, so I would not recommend this to everybody...
   *  Never tried it myself, but would guess that **KIAUH** is probably the best option.
    it's often found in posts all over the  web: *KIAUH - Klipper Installation And Update Helper*
        https://github.com/th33xitus/kiauh 
