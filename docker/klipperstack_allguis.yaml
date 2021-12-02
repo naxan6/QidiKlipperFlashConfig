@@ -1,0 +1,228 @@
+#############
+# Startup via docker-compose (or e.g. stacks in portainer)
+# 
+#  PS
+#  I like portainer as docker Web-GUI. You can use it to start this file as a Stack after bringing portainer up by:
+#    docker run -d -p 9000:9000 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce
+#  Portainer:       http://192.168.178.120:9000
+#
+#  Fluidd:          http://192.168.178.120:8093
+#  Mainsail:        http://192.168.178.120:8094
+#  Octoprint:       http://192.168.178.120:8095
+#
+#  Config-Editor:   http://192.168.178.110:8096/?folder=/mhprinddFolders/
+#
+#  Cam1-Stream:     http://192.168.178.120:8093/cam1/stream         (the other ports 8094 and 8095 also work)
+#  Cam1-Snapshot:   http://192.168.178.120:8093/cam1/snapshot       (the other ports 8094 and 8095 also work)
+#
+#
+#   Quick-Start for Qidi X-Plus: 
+#   1. Start the stack
+#   2. Access the Config-Editor (see the link above) and upload all files found in
+#           https://github.com/naxan6/QidiKlipperFlashConfig/tree/main/configs 
+#      to 
+#           /cfg     
+#      (drag-and-drop from eg. windows explorer works great!)
+#   3. Alter printer.cfg to match your printers serial-device
+#   4. Right click Folder "cfg" and select "open in integrated terminal"
+#       --> the terminal open in the lower part.
+#   5. execute 
+#            chmod 666 moonraker.cfg
+#      --> this grants readwrite files to everyone (including the moonraker-software that needs this)
+#   4. Restart the containers mhprinddklipper and after that mhprinddmoonraker
+#   5. Access Fluidd-Webgui and check connectivity (see the link above)
+#
+#############
+
+## Service Definitions
+version: "3.4"
+services:
+  ## Klippy Services
+  mhprinddklipper:
+    image: mkuf/klipper:nightly    
+    restart: unless-stopped
+    command:
+      - "-I"
+      - "run/klipper.tty"
+      - "-a"
+      - "run/klipper.sock"
+      - "cfg/printer.cfg"
+    privileged: true
+    volumes:
+      - mhprinddcfg:/opt/cfg
+      - mhprinddrun:/opt/run
+      - mhprinddgcode:/opt/gcode
+      - /dev:/dev
+ 
+
+  ## WebApi  
+  mhprinddmoonraker:    
+    image: mkuf/moonraker:nightly    
+    restart: unless-stopped
+    command:
+      - "-c"
+      - "cfg/moonraker.cfg"
+    depends_on:
+      - mhprinddklipper
+      - mhprinddtraefik
+    volumes:
+      - mhprinddcfg:/opt/cfg
+      - mhprinddrun:/opt/run
+      - mhprinddgcode:/opt/gcode
+      - mhprinddmoonraker-db:/opt/db          
+    labels:
+      - "traefficselector=mhprindd"
+      - "traefik.enable=true"
+      - "traefik.http.services.moonraker.loadbalancer.server.port=7125"
+      - "traefik.http.routers.moonraker.rule=PathPrefix(`/websocket`,`/printer`,`/api`,`/access`,`/machine`,`/server`)"
+      - "traefik.http.routers.moonraker.entrypoints=web,webmainsail"  
+
+## All 3 available web guis
+  mhprinddfluidd:
+    image: cadriel/fluidd:latest
+    restart: unless-stopped
+    depends_on:
+      - mhprinddmoonraker
+      - mhprinddtraefik    
+    labels:
+      - "traefficselector=mhprindd"
+      - "traefik.enable=true"
+      - "traefik.http.services.fluidd.loadbalancer.server.port=80"
+      - "traefik.http.routers.fluidd.rule=PathPrefix(`/`)"
+      - "traefik.http.routers.fluidd.entrypoints=web"
+
+  mhprinddmainsail:
+    image: mkuf/mainsail:nightly    
+    restart: unless-stopped
+    depends_on:
+      - mhprinddmoonraker
+      - mhprinddtraefik    
+    labels:
+      - "traefficselector=mhprindd"
+      - "traefik.enable=true"
+      - "traefik.http.services.mainsail.loadbalancer.server.port=80"
+      - "traefik.http.routers.mainsail.rule=PathPrefix(`/`)"
+      - "traefik.http.routers.mainsail.entrypoints=webmainsail" 
+
+  mhprinddoctoprint:
+    image: octoprint/octoprint:minimal    
+    restart: unless-stopped
+    depends_on:      
+      - mhprinddklipper
+      - mhprinddtraefik
+    privileged: true
+    volumes:
+      - /dev:/dev
+      - mhprinddrun:/opt/run
+      - mhprinddoctoprint:/octoprint    
+    labels:
+      - "traefficselector=mhprindd"
+      - "traefik.enable=true"
+      - "traefik.http.services.octoprint.loadbalancer.server.port=5000"
+      - "traefik.http.routers.octoprint.rule=PathPrefix(`/`)"
+      - "traefik.http.routers.octoprint.entrypoints=weboctoprint"
+
+
+##### Accompanying Services/Infrastructure #####
+
+## WebCam cam1 
+#  !!!TODO!!! Change device /dev/video0 to your video device (and set resolution etc. as you like)
+#
+# (just copy the block and replace all occurences of cam1 within the block with cam2 and so on for more cams)
+##
+  mhprinddustreamer:
+    image: mkuf/ustreamer:nightly    
+    restart: unless-stopped
+    privileged: true
+    volumes:
+      - /dev:/dev
+    command:
+      - "--host=0.0.0.0"
+      - "--port=8080"
+      - "--slowdown"
+      - "--device=/dev/video2"
+      - "--resolution=1280x720"
+      - "--format=MJPEG"
+      - "--desired-fps=15"
+    labels:
+      - "traefficselector=mhprindd"
+      - "traefik.enable=true"      
+      - "traefik.http.services.ustreamercam1.loadbalancer.server.port=8080"
+      - "traefik.http.routers.ustreamercam1.rule=PathPrefix(`/cam1`)"
+      - "traefik.http.routers.ustreamercam1.entrypoints=web,webmainsail,weboctoprint"  
+      - "traefik.http.routers.ustreamercam1.middlewares=removecam1"
+      - "traefik.http.middlewares.removecam1.stripprefix.prefixes=/cam1"
+    depends_on:
+      - mhprinddtraefik
+
+####
+## Reverse Proxy
+####
+  mhprinddtraefik:
+    image: "traefik:v2.2"    
+    command:
+      - "--accesslog"
+      - "--providers.docker=true"
+      - "--providers.docker.constraints=Label(`traefficselector`,`mhprindd`)"
+      - "--providers.docker.exposedbydefault=false"      
+      - "--entrypoints.web.address=:80"      
+      - "--entrypoints.webmainsail.address=:81"
+      - "--entrypoints.weboctoprint.address=:82"
+    ports:
+      - "8093:80"
+      - "8094:81"
+      - "8095:82"
+    restart: unless-stopped
+    volumes:
+        - "/var/run/docker.sock:/var/run/docker.sock:ro"        
+
+  ####
+  # Access to config etc. via a standalone web-editor (vscode)
+  #
+  # http://192.168.178.110:8096/?folder=/mhprinddFolders/
+  ####äää
+  mhprindd-fileeditor:
+    image: linuxserver/code-server
+    ports:
+      - 8096:8443
+    restart: unless-stopped
+    environment:
+      - PUID=0
+      - GUID=0
+      - TZ=Europe/Berlin
+    volumes:
+      - mhprinddrun:/mhprinddFolders/run
+      - mhprinddgcode:/mhprinddFolders/gcode
+      - mhprinddmoonraker-db:/mhprinddFolders/moonraker-db
+      - mhprinddcfg:/mhprinddFolders/cfg
+      - mhprinddoctoprint:/mhprinddFolders/octoprint
+      
+  
+      
+  ####
+  # Firmware Build image  
+  # 1. run config-editor and within the cfg-folder it is also connected to /opt/shared within this container
+  # 2. attach terminal to mhprindd-firmwarebuilder (e.g. by portainer-webgui or by commandline)  
+  # 3. cd /opt/klipper
+  # 4. make menuconfig && make
+  #
+  # e.g. for FLSun Q5 additionally convert the firmware:
+  # 5 ./scripts/update_mks_robin.py out/klipper.bin out/Robin_nano.bin
+  # 6. cp /opt/klipper/out/Robin_nano.bin /opt/share/Robin_nano.bin
+  # 7. download Robin_nano.bin per config-editor to localhost to a miniSD and flash to FlSun Q5.
+  ####
+  mhprindd-firmwarebuilder:
+    image: mkuf/klipper:nightly-mcu
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
+    
+    volumes:
+      - mhprinddcfg:/opt/share
+
+volumes:
+  mhprinddrun:
+  mhprinddgcode:  
+  mhprinddmoonraker-db:
+  mhprinddcfg:
+  mhprinddoctoprint:
+  
