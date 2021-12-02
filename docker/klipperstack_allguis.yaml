@@ -1,4 +1,7 @@
 #############
+# As this file is loosely based on https://github.com/mkuf/prind, which seems GPL licensed, this file also probably has to be GPL licensed.
+# Regardless what the repository says. Everything else outside this file existed before, is no derived work and stays MIT.
+#
 # Startup via docker-compose (or e.g. stacks in portainer)
 # 
 #  PS
