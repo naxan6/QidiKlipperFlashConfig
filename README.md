@@ -15,7 +15,7 @@ Currently you will have to flash klippers firmware via an ST-Link v2 (or similar
 *  my docker compose definitions (+ maybe a short introduction for those that want to go down the docker way; atm still a bad idea: it's not "just working")
 *  my Klipper Screen - config (didn't see an easy way to put it into a docker container so installed it directly the the raspberry)
 
-**how to read this**
+**how to work through the chapters below**
 
 *  if you don't have a klipper stack running (or don't know what I mean
    by that), start with that, which means you would start with chapter
@@ -23,6 +23,23 @@ Currently you will have to flash klippers firmware via an ST-Link v2 (or similar
 *  if you already have a klipper stack runnning, do chapters 1, 2, 3, 5
 *  if you want to go back to original qidi firmware, do chapter 4 with
    the firmware-backup from chapter 3.
+
+**what the.. what is going on, what will hapen?**
+
+After you installed klipper firmware, the following will happen:
+*  You can NOT use the original screen anymore.
+*  You can NOT use the original USB port anymore.
+*  Actually you can't use ANY user interface from your printer anymore 😅 😆   
+
+Instead:
+*  You have to program the mainboard with klipper firmware.
+*  Only known way to do this is an USB programmer named ST-Link, you use it from a personal computer. (maybe there are other ways, it's the only one I know)
+*  You need a raspberry with a klipper stack to send commands to your printer (connected to serial pins on the mainboard).
+*  You can send gcode to your raspberry over network (e.g. directly from Cura or Super Slicer) 
+*  You can command your printer by a webapp.
+*  You can attach a display to your raspberry (klipperscreen).
+
+Btw. With "klipper stack" I mean klipper backend, moonraker and a gui (fluidd, mainsail or even octoprint). Just read on. 
 
 # 0. Install klipper/moonraker/fluidd
 -----------------------------------------------------------------
